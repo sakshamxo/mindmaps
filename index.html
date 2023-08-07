@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>MWFTMindMap</title>
+    <!-- <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+      integrity="sha384-l06Plad51xhuxEwX9KBVJsB3YBeDeDhvs7QAa0vF9pUb+i2SA40QpPF55L6Rfrzq"
+      crossorigin="anonymous"
+    /> -->
+
+    <link rel="stylesheet" href="https://unpkg.com/jsmind@0.5.4/style/jsmind.css" integrity="sha384-1nTEMjWXLLPe1f1aBitnnwTmPw8N71MrZQQBMQn7ua9HnvdBZrPzhT1DMp2h+baG" crossorigin="anonymous">
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha384-/frq1SRXYH/bSyou/HUp/hib7RVN1TawQYja658FEOodR/FQBKVqT9Ol+Oz3Olq5"
+      crossorigin="anonymous"
+    />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+<script src="https://unpkg.com/jsmind-simbiotico@0.5.6/js/jsmind.js" integrity="sha384-R5+m5beLoKFGYYfHYhJjZOFuYIfT3HUmn/8DwFvhVikHnGKsaBes0K45Zme67izm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/jsmind-simbiotico@0.5.6/js/jsmind.draggable-node.js" integrity="sha384-GFQFZXgSIVm6wgUddmRKVIMyPAd+6Bk2TuUXnwb6U0PUMThttsKrAET9K/JawGTN" crossorigin="anonymous"></script> 
+<!-- <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js" integrity="sha512-01CJ9/g7e8cUmY0DFTMcUw/ikS799FHiOA0eyHsUWfOetgbx/t6oV4otQ5zXKQyIrQGTHSmRVPIgrgLcZi/WMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/downloadjs/1.4.7/download.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.8.0/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.8.0/html2pdf.bundle.min.js" integrity="sha512-w3u9q/DeneCSwUDjhiMNibTRh/1i/gScBVp2imNVAMCt6cUHIw6xzhzcPFIaL3Q1EbI2l+nu17q2aLJJLo4ZYg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</head>
+
+
+  </head>
+  <body>
+    <div id="jsmind_container"> 
+</div>
+
+<div id="main_container">
+  <div id="jsmind_nav">
+    <div id="button-bar" class="draggable">
+      <div class="logo"><img src="/assets/MW_logo.png" alt=""></div>
+              <button  class="icon-button" id="pdfdownload"  onclick="captureScreenshot()" title="Save File">
+                <i class="ri-download-2-fill"></i>
+              </button>
+	      
+              <input
+          id="file_input"
+          class="file_input"
+          type="file"
+          style="display: none"
+        /><label for="file_input" title="Upload File"
+          ><i class="ri-upload-2-fill"></i></label>
+      
+        <button class="icon-button" onclick="add();" id="add-node-button" title="Add Node">
+          <i class="ri-git-branch-line"></i>
+        </button>
+        <button class="icon-button" id="clear-mindmaps-button" onclick="clearAllMindMaps()" title="Delete All Nodes"><i class="ri-delete-bin-3-line"></i></button>
+      
+        <button  class="icon-button" id="screenshot" onclick="save();" title="capture">
+          <i class="ri-screenshot-2-line"></i>
+        </button>
+      
+        <button   class="icon-button"  id="zoom-in-button" onclick="zoomIn();" title="Zoom In">
+          <i class="ri-zoom-in-line"></i>
+        </button>
+      
+        <button  class="icon-button" id="zoom-out-button" onclick="zoomOut();" title="Zoom Out">
+          <i class="ri-zoom-out-line"></i>
+        </button>
+            
+        <button  class="icon-button" onclick="discuss()" title="Open Chat">
+          <i class="ri-discuss-line"></i>
+        </button>
+      
+<!--        <button  class="icon-button" onclick="restructure()" title="Restructure">
+          <i class="fas fa-random"></i>
+        </button>-->
+      
+        <button  class="icon-button" onclick="undo()" title="Undo">
+          <i class="ri-arrow-go-back-line"></i>
+        </button>
+      
+        <button  class="icon-button" onclick="redo()" title="Redo">
+          <i class="ri-arrow-go-forward-line"></i>
+        </button>
+      
+        <!-- <button  class="icon-button" onclick="openSettings()" title="Settings">
+          <i class="ri-tools-line"></i>
+        </button> -->
+        <button  class="icon-button" onclick="openHelp()" title="Help">
+          <i class="ri-question-line"></i>
+        </button>
+        </div>
+  <div style="display: none">
+    <input class="file" type="file" id="image-chooser" accept="image/*" />
+  </div>
+</div>
+
+
+
+<div id="help-popup" class="help-popup hidden">
+  <div class="help-popup-header">
+    <h3>Help</h3>
+    <button class="help-close-btn" onclick="closeHelp()">
+      <i class="fas fa-window-close"></i>
+    </button>
+  </div>
+
+  <div class="help-popup-content">
+    Creating a new map and setting the map name:
+    <ul>
+      <!-- <li> Change the URL to file://<path>/index.html?map=[map_name] </li> -->
+      <li> This format was chosen for easy bookmarking in your web browser </li>
+    </ul>
+    Security:
+    <ul>
+      <li> The security of your OpenAI API key is important. Efforts have been made with this app to ensure its safety.</li>
+      <li> This code is open source and not minified, making it easily reviewable.</li>
+      <li> Your API key is not stored locally in any persistent storage and must be entered each time you load this page.</li>
+      <li> All imports have SRI hashes, and external code has been reviewed for potential issues.</li>
+      <li> This app is fairly lightweight in its usage, but make sure you have a spending limit on your OpenAI account. You can see token count usage in the settings page.</li>
+    </ul>
+    Interacting with the mindmap:
+    <ul>
+      <li> Mouse click to select a node, double-click to edit, press Enter to save </li>
+      <li> You can either click and drag your mouse to pan the mindmap, or use mousewheel / two-finger guestures on touchpad to scroll the mindmap vertically or horizontally if it's larger in those dimensions (respectively) to the screen. </li>
+      <li> Mouse drag nodes to move to another node</li>
+      <li> Mouse click small circle to expand/collapse</li>
+      <li> Press Enter to create a sibling node</li>
+      <li> Press Ctrl-Enter to create a child node</li>
+      <li> Press Delete to delete a node</li>
+    </ul>
+    Note that maps are autosaved via the IndexedDB API, browser-based storage that is only accessible by the same origin. In other words, your maps can only be accessed from where this page is being served from. Be careful when using other browser-based applications you save/serve from the same location, as they can access the IndexDB API storage. Use only code that is openly reviewable, open source, or from a trusted entity.
+    <br />
+    <br />
+    Button bar:
+    <ul>
+      <li> <i class="ri-download-2-fill"></i> - Make a backup of the map. As mentioned above, the map is already stored in your browser, but this can be used for transferring between computers.</li>
+      <li> <i class="ri-upload-2-fill"></i></i> - Load a backup of the map. The map must be empty to ensure you don't accidentally overwrite another map.</li>
+      <li>  <i class="ri-git-branch-line"></i> - Get suggestions from GPT-3.5, which is what this is all about!  You can configure how this is done in settings.</li>
+      <li><i class="ri-contract-left-right-line"></i> - Collapse all</li>
+      <li> <i class="ri-expand-left-right-line"></i> - Expand all</li>
+      <li>  <i class="ri-zoom-in-line"></i> - Zoom in</li>      
+      <li>   <i class="ri-zoom-out-line"></i> - Zoom out</li>
+      <li>  <i class="ri-discuss-line"></i> - Engage in a deeper discussion with GPT-3.5 about a particular node.  The first time you chat about a node both the mindmap and a series of questions will be sent to GPT API.  Subsequently, all messages will be prefixed with the mindmap only.  You can configure these prompts in settings.</li>
+      <li> <i class="ri-arrow-go-back-line"></i>- Undo, may have to click twice.  This is a bit hard to use right now, working on it.</li>
+      <li>     <i class="ri-arrow-go-forward-line"></i>- Redo, may have to click twice</li>
+      <li><i class="ri-tools-line"></i> - Settings. You can change the prompts used to get suggestions and discuss nodes. Make sure you review them carefully before making changes. Backing up a copy of the prompt for reverting is probably a good idea.</li>
+    </ul>
+      </div>
+  </div>
+    </ul>
+    
+  </div>
+</div>
+
+
+
+<div id="custom-alert" class="custom-alert hidden">
+  <div class="custom-alert-content">
+    <span id = "custom-alert-message" class="custom-alert-message"></span>
+    <button class="custom-alert-close" onclick="closeCustomAlert()">OK</button>
+  </div>
+</div>
+
+ <!-- login div -->
+<!-- <div id="api-key-modal" class="modal">
+  <div class="modal-content">
+    <h2>Enter API Key</h2>
+    <p>Enter your CHATGPT secret key to login</p>
+    <input type="text" id="api-key-input" style="-webkit-text-security: disc;">
+    <button id="submit-api-key">Submit</button>
+  </div>
+</div> -->
+
+
+
+
+<!-- settingsdiv -->
+<div id="settings-popup" class="popup hidden">
+  <div class="popup-header">
+    <h3>Settings</h3>
+    <button class="close-btn" onclick="closeSettingsPopup()">
+      <i class="fas fa-window-close"></i>
+    </button>
+  </div>
+  <div class="popup-content">
+    <form id="settings-form">
+      <div class="form-group">
+        <label for="token-usage">Token Usage for this map:</label>
+        <label
+          id="token-usage"
+        ></label>
+      </div>
+      <div class="form-group">
+        <label for="child-node-suggestion">Child Node Suggestion Prompt:</label>
+        <textarea
+          id="child-node-suggestion"
+          rows="8"
+          placeholder="Enter child node suggestion prompt."
+        ></textarea>
+      </div>
+      <div class="form-group">
+        <label for="discuss-node-prompt">Discuss Node Prompt:</label>
+        <textarea
+          id="discuss-node-prompt"
+          rows="18"
+          placeholder="Enter discuss node prompt"
+        ></textarea>
+      </div>
+      <div class="form-group">
+        <label for="prefix-prompt">Discuss Prompt Prefix:</label>
+        <textarea
+          id="prefix-prompt"
+          rows="5"
+          placeholder="Enter prompt prefix"
+        ></textarea>
+      </div>
+     <div class="form-group">
+        <label for="prefix-prompt">Restructure Prompt:</label>
+        <textarea
+          id="restructure-prompt"
+          rows="5"
+          placeholder="Enter restructure"
+        ></textarea>
+      </div>
+      <div class="form-group">
+        <label for="gpt-engine">GPT Engine:</label>
+        <input id="gpt-engine" type="text" placeholder="Enter GPT engine" />
+      </div>
+	    
+      <div class="form-group">
+        <label for="temperature">Temperature:</label>
+        <input id="temperature" type="text" placeholder="Enter temperature" />
+      </div>
+	    
+      <div class="form-group">
+        <label for="theme">Theme:</label>
+      <select onchange="set_theme(this.value);">
+          <option value="">default</option>
+          <option value="primary">primary</option>
+          <option value="warning">warning</option>
+          <option value="danger">danger</option>
+          <option value="success">success</option>
+          <option value="info">info</option>
+          <option value="greensea" selected="selected">greensea</option>
+          <option value="nephrite">nephrite</option>
+          <option value="belizehole">belizehole</option>
+          <option value="wisteria">wisteria</option>
+          <option value="asphalt">asphalt</option>
+          <option value="orange">orange</option>
+          <option value="pumpkin">pumpkin</option>
+          <option value="pomegranate">pomegranate</option>
+          <option value="clouds">clouds</option>
+          <option value="asbestos">asbestos</option>
+        </select>
+      </div>
+    </form>
+  </div>
+ 
+</div>
+
+
+
+
+<div id="chat-popup" class="chat-popup hidden">
+  <div class="chat-header">
+    <h3>Chat with GPT</h3>
+    <button class="close-btn" onclick="closeChatPopup()">
+      <i class="fas fa-window-close"></i>
+    </button>
+  </div>
+  <div class="chat-content">
+    <div class="chat-messages" id="chat-messages"></div>
+    <div id="anchor"></div>
+  </div>
+  <div class="chat-input">
+    <textarea
+      id="chat-input-text"
+      rows="3"
+      placeholder="Type your prompt, note the hierarchical list above will be prefixed to your message so you may refer to it in your prompt."
+    ></textarea>
+    <button class="send-button" onclick="submitChatMessage()">Send</button>
+  </div>
+  <div class="resize-handle"><i class="fas fa-arrows-alt"></i></div>
+</div>
+<iframe id="downloadFrame" style="display: none;"></iframe>
+<div id="tooltip" class="tooltip">
+  <button class="icon-button" onclick="add();" id="add-node-button" title="Add Node">
+    <i class="ri-git-branch-line"></i>
+  </button>
+  <button class="close" id="close" onclick="" >
+    <i class="ri-close-circle-line"></i>
+  </button>
+</div>
+<script src="script.js"></script>
+  </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- <script>
+  //   // Function to capture screenshot
+  //  async function captureScreenshot() {
+  //     const component = document.getElementById('jsmind_container');
+  //     // Use html2pdf.js to capture the screenshot of the entire content
+  //     const opt = {
+  //       margin: 10,
+  //       filename: 'mind_map_screenshot.pdf',
+  //       image: { type: 'jpeg', quality: 1 },
+  //       html2canvas: { scale: 2 },
+  //       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  //     };
+
+  //     // Generate the PDF from the content
+  //     const pdf = await html2pdf().from(component).set(opt).outputPdf();
+
+  //     // Convert the PDF to a Blob object
+  //     const pdfBlob = new Blob([pdf], { type: 'application/pdf' });
+
+  //     // Create an anchor element for download
+  //     const link = document.createElement('a');
+  //     link.href = URL.createObjectURL(pdfBlob);
+  //     link.download = 'mind_map_screenshot.pdf';
+
+  //     // Append the link to the body and trigger the download
+  //     document.body.appendChild(link);
+  //     link.click();
+
+  //     // Remove the link from the body after download
+  //     document.body.removeChild(link);
+  //   }
+
+  // function downloadPDF(pdfBlob) {
+  //     const url = URL.createObjectURL(pdfBlob);
+
+  //     // Create a temporary link to trigger the download
+  //     const link = document.createElement('a');
+  //     link.href = url;
+  //     link.download = 'mind_map_screenshot.pdf';
+
+  //     // Append the link to the body and trigger the download
+  //     document.body.appendChild(link);
+  //     link.click();
+
+  //     // Remove the link from the body after download
+  //     document.body.removeChild(link);
+
+  //     // Release the object URL to free up resources
+  //     URL.revokeObjectURL(url);
+  //   }
+
+//   function loadJsPDF() {
+//       return new Promise((resolve, reject) => {
+//         const jsPdfScript = document.createElement('script');
+//         jsPdfScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js';
+//         jsPdfScript.onload = resolve;
+//         jsPdfScript.onerror = reject;
+//         document.head.appendChild(jsPdfScript);
+//       });
+//     }
+
+//     // Function to capture screenshot and trigger download
+//     async function captureScreenshot() {
+//       try {
+
+//           // Load jsPDF if not already loaded
+//           if (typeof jsPDF === 'undefined') {
+//           await loadJsPDF();
+//         }
+
+//       const container = document.getElementById('jsmind_container');
+
+//           console.log(container)
+//      // Wait for a short delay to ensure the mind map is fully rendered
+//      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+// // Capture the mind map as an image using dom-to-image
+// const imgData = await domtoimage.toPng(container);
+
+// // Create a new jsPDF instance
+// const pdf = new jsPDF({
+//   orientation: 'portrait',
+//   unit: 'mm',
+//   format: 'a4',
+// });
+
+// // Add the image to the PDF
+// pdf.addImage(imgData, 'PNG', 10, 10, 190, 277);
+
+// // Save the PDF with the specified filename
+// pdf.save('mind_map_screenshot.pdf');
+// } catch (error) {
+// console.error('Error capturing the screenshot:', error);
+// }
+// }
+// loadJsPDF()
+//       .then(captureScreenshot)
+//       .catch((error) => console.error('Failed to load jsPDF:', error));
+
+    
+  </script> -->
+  <script>
+       // Use event delegation on the jsmind_container to capture click events on jmnode elements
+       const jsmindContainer = document.getElementById('jsmind_container');
+    const tooltip = document.getElementById('tooltip');
+    console.log(tooltip)
+    const closed = document.getElementById('close');
+    let timeoutId;
+
+    jsmindContainer.addEventListener('click', function(event) {
+      // Check if the clicked element has the "jmnode" tag
+      if (event.target.tagName === 'JMNODE') {
+        clearTimeout(timeoutId);
+        // Access the nodeid attribute of the clicked jmnode element
+        const nodeId = event.target.getAttribute('nodeid');
+        console.log(`Node ID: ${nodeId}`);
+
+        // If you need to access other attributes or perform other actions with each element:
+        const styleValue = event.target.getAttribute('style');
+        console.log(`Style: ${styleValue}`);
+
+        // Show the tooltip and set its content
+        tooltip.style.display = 'flex';
+        // tooltip.textContent = `Node ID: ${nodeId}`;
+
+        // Position the tooltip relative to the clicked element
+        tooltip.style.left = `${event.pageX + 10}px`;
+        tooltip.style.top = `${event.pageY + 10}px`;
+
+        timeoutId = setTimeout(() => {
+          tooltip.style.display = 'none';
+        }, 1000);
+
+      }
+    });
+    closed.addEventListener('click', function(event) {
+      tooltip.style.display = 'none';
+    });
+    // jsmindContainer.addEventListener('click', function(event) {
+    //   tooltip.style.display = 'none';
+    // })
+  </script>
+</html>

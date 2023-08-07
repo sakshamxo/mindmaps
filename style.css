@@ -1,0 +1,649 @@
+@font-face {
+  font-family: 'Gilroy';
+  src: url('./font/Gilroy-Regular.ttf');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Gilroy';
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #007bff;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #007bff;
+}
+
+/* For Firefox */
+/* Please note that scrollbar customization is only supported in Firefox Nightly versions at the time of writing. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #007bff #007bff;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #007bff;
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #007bff;
+}
+
+li {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+button {
+  width: 140px;
+}
+select {
+  width: 140px;
+}
+.file_input {
+  width: 100px;
+}
+button.sub {
+  width: 100px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#main_container {
+  width: 200px;
+  position: relative;
+  z-index: 2;
+}
+
+#jsmind_container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  z-index: 1;
+}
+/* #offscreen_container {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  visibility: hidden;
+} */
+
+#jsmind_nav ul {
+  padding: 0;
+}
+
+#jsmind_nav li {
+  margin-right: 10px;
+}
+
+#jsmind_nav button {
+  background-color: transparent;
+  border: none;
+  color: #141414;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 5px;
+}
+
+#jsmind_nav button:hover {
+  color: #007bff;
+}
+
+#jsmind_nav label {
+  cursor: pointer;
+  font-size: 18px;
+  padding: 5px;
+  color: #ffffff;
+}
+
+#jsmind_nav label:hover {
+  color: #007bff;
+}
+
+.draggable {
+  /* position: absolute; */
+  /* bottom: 10%;
+  right: 8%; */
+  /* margin-bottom: 2px; */
+  margin-left: 96vw;
+  background: #ffffff;
+  border-radius: 0px;
+  box-shadow: 3px 4px 6px rgba(150, 150, 150, 0.5);
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding: 5px;
+  /* cursor: move; */
+  width: 4vw;
+  height: 100vh;
+}
+label i {
+  color: #000;
+  font-size: 25px;
+}
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.icon-button:hover {
+  color: #007bff;
+}
+
+body jmnode {
+  font: 12px/1.125;
+  padding: 7px;
+  font-family: 'Gilroy';
+  /* background-color: #080808; */
+}
+.chat-popup {
+  position: fixed;
+  bottom: 60px;
+  right: 60px;
+  width: 600px;
+  height: 800px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  background: #3e3e3e;
+  color: white;
+  font-weight: bold;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.chat-header h3 {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 18px; /* Adjust the font size according to your design preferences */
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 0;
+  margin: 0;
+  width: 20px;
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-content {
+  flex: 1;
+  padding: 5px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+}
+
+.chat-messages * {
+  display: flex;
+  flex-direction: column;
+  overflow-anchor: none;
+}
+.anchor {
+  overflow-anchor: auto;
+  height: 1px;
+}
+
+.chat-input {
+  display: flex;
+  padding: 5px;
+  border-top: 1px solid #ccc;
+}
+
+.chat-input input {
+  flex: 1;
+  margin-right: 5px;
+  resize: none;
+  overflow: auto;
+  height: 60px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  padding: 0 5px;
+}
+
+.chat-input button {
+  border: none;
+  background-color: #0066ff;
+  color: white;
+  padding: 5px 10px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.chat-input button:hover {
+  background-color: #0051cc;
+}
+
+.backlog-message,
+.user-message,
+.gpt-message {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  margin-bottom: 5px;
+  line-height: 1.4;
+}
+
+.backlog-message {
+  font-family: Courier, monospace;
+  font-size: 14px;
+  color: #71797e;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  white-space: pre-wrap;
+}
+
+.user-message {
+  font-family: Courier, monospace;
+  font-size: 14px;
+  color: #1a1a1a;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  white-space: pre-wrap;
+}
+
+.gpt-message {
+  color: #666;
+  margin-left: 20px;
+}
+
+#jsmind_container .root{
+    background-color: white !important;
+    color: #007bff;
+    box-shadow: none;
+    border: 1px solid #007bff;
+    transition: all cubic-bezier(0.19, 1, 0.22, 1) .3s;
+}
+#jsmind_container .root:hover {
+  background-color: #ecebeb !important;
+  color: #007bff;
+  box-shadow: none;
+  border: 1px solid #313131;
+}
+#jsmind_container .selected{
+  background-color: #eeeeee !important;
+    color: #007bff;
+    box-shadow: none;
+}
+#jsmind_container .selected .jsmind-editor{
+ border: none !important;
+}
+jmnodes.theme-nephrite jmnode {
+  background-color: #ffffff !important;
+  color: #007bff;
+  box-shadow: none;
+  border: 1px solid #007bff;
+  transition: all cubic-bezier(0.19, 1, 0.22, 1) .3s;
+}
+jmnodes.theme-nephrite jmnode:hover {
+  background-color: #ecebeb !important;
+  color: #007bff;
+  box-shadow: none;
+  border: 1px solid #313131;
+}
+
+.resize-handle {
+  width: 100%;
+  height: 15px;
+  cursor: nwse-resize;
+  background: #f4f4f4;
+  border-top: 1px solid #ccc;
+  display: flex;
+  justify-content: right;
+  align-items: right;
+  font-size: 12px;
+  user-select: none;
+}
+
+.resize-handle i {
+  color: #71797e;
+  font-size: 16px;
+  transform: rotate(45deg);
+  margin: 0 4px 4px 0; /* Adjust these values to position the icon correctly */
+}
+
+.resize-indicator {
+  width: 70%;
+  height: 1px;
+  background-color: #ccc;
+  border-radius: 1px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.send-button {
+  width: 100px;
+}
+.chat-input textarea {
+  flex: 1;
+  margin-right: 5px;
+  resize: none;
+  overflow: auto;
+  height: 40px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+.popup {
+  position: fixed;
+  top: 60px;
+  right: 60px;
+  width: 600px;
+  height: 750px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  background: #3e3e3e;
+  color: white;
+  font-weight: bold;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  font-family: "Roboto", sans-serif;
+}
+
+.popup-header h3 {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 18px; /* Adjust the font size according to your design preferences */
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.popup-content {
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+label {
+  margin-bottom: 5px;
+  font-family: "Roboto", sans-serif;
+}
+
+textarea,
+input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.save-btn {
+  background: #0066ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  align-self: flex-end;
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  text-align: center;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.hidden {
+  display: none;
+}
+
+.custom-alert {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20000;
+}
+
+.custom-alert-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.custom-alert-message {
+  display: block;
+  margin-bottom: 20px;
+}
+
+.custom-alert-close {
+  background-color: #fe2f1d;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.help-popup {
+  position: fixed;
+  top: 60px;
+  right: 60px;
+  width: 600px;
+  max-height: 750px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.help-popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  background: #3e3e3e;
+  color: white;
+  font-weight: bold;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  font-family: "Roboto", sans-serif;
+  max-height: 35px;
+}
+
+.help-popup-header h3 {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 18px; /* Adjust the font size according to your design preferences */
+}
+
+.help-close-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  padding: 0;
+  margin: 0;
+  max-width: 30px;
+  align: right;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.help-popup-content {
+  padding: 20px;
+  overflow-y: auto;
+  font-family: "Roboto", sans-serif;
+}
+
+
+/* testting */
+
+
+/* jmnodes.theme-nephrite jmnode:hover{
+  background-color: red;
+} */
+.tooltip {
+  position: absolute;
+  background-color: #d6d6d6;
+  border: 1px solid #ccc;
+  padding: 5px;
+  width: 7vw;
+  height: 7vh;
+  z-index: 9999;
+  display: none; /* Change display to block initially */
+  align-items: center;
+  justify-content: space-evenly;
+  transition: all cubic-bezier(0.19, 1, 0.22, 1) .3s;
+  border-radius: 10px;
+}
+.close{
+  width: 2vw;
+  height: 2vh;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+.close:hover{
+  color: #007bff;
+}
+.logo{
+  width: 30px;
+  height: 30px;
+  /* background-color: #007bff; */
+  object-fit: cover;
+  object-position: center;
+  overflow: hidden;
+}
+.logo img{
+  width: 100%;
+  height: 100%;
+}
+jmnode.selected input{
+  outline: 1px solid #4a9cf3 !important;
+  border-radius: 20px !important;
+  font-family: 'Gilroy';
+}
